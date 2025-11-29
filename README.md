@@ -1,2 +1,1 @@
-The R codes for two-sample Mendelian randomization and colocalization analyses for the causal effects of T2D-related pathways, insulin secretion and insulin sensitivity on 
-maternal and fetal genetically-determined birth weight in Europeans.
+The codes for conditional association analysis, Mediation analysis, two-sample Mendelian randomization, colocalization analyses in assessing the effects of maternal and fetal genetic predispositions to insulin deficiency and resistance on fetal growth.
