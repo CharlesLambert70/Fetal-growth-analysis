@@ -25,8 +25,6 @@ for (j in c('OS_BIRTH_LENGTH','OS_BIRTH_WEIGHT','OS_BIRTH_PI','OS_BIRTH_HEAD','O
   rownames(result1)<-result1$term
   result[n,'group']<-k
   result[n,'PRS']<-colnames(data)[i]
-  #result[n,'MA']<-i
-  result[n,'moderator']<-h
   result[n,'trait']<-j
   result[n,'p_MA']<-result1['get(colnames(data)[i])','p.value']
   result[n,'z_MA']<-result1['get(colnames(data)[i])','statistic']
@@ -69,8 +67,6 @@ for (j in c('LGA','SGA')){
   rownames(result1)<-result1$term
   result[n,'group']<-k
   result[n,'PRS']<-colnames(data)[i]
-  #result[n,'MA']<-i
-  result[n,'moderator']<-h
   result[n,'trait']<-j
   result[n,'p_MA']<-result1['get(colnames(data)[i])','p.value']
   result[n,'z_MA']<-result1['get(colnames(data)[i])','statistic']
@@ -85,6 +81,34 @@ for (j in c('LGA','SGA')){
   result[n,'ci_low_OS']<-m['get(colnames(data)[i+75])',1]
   result[n,'ci_up_OS']<-m['get(colnames(data)[i+75])',2]
   result[n,'n']<-length(model[["residuals"]])
+ n<-n+1
+  }
+  }
+  }
+
+# Conditional associations between maternal PRS and maternal metabolic traits in pregnancy
+
+for (k in c('AFC','AMR','CHN','THAI')){
+  #for (k in c('EUR')){
+  data1<-subset(data,HAPO.x==k)
+for (i in 2:10){
+for  (j in c('MA_PREPREG_BMI','MA_OGTT_WEIGHT','MA_OGTT_BMI',"MA_OGTT_SBP","MA_OGTT_DBP",'MA_OGTT_CP0_nmol',"MA_OGTT_GLU0", "MA_OGTT_GLU60","MA_OGTT_GLU120","MA_OGTT_GAUC", "MA_OGTT_HBA1C_mmol","MA_OGTT_HOMA2_B" ,
+      "MA_OGTT_HOMA2_IR")){
+
+  model<-lm(get(j)~get(colnames(data)[i])+MA_OGTT_AGE+factor(MA_PARITY)+OS_OGTT_GA+PC1+PC2+PC3+PC4+PC5,data1) #for AFC,AMR,CHN and THAI
+  #model<-lm(get(j)~get(colnames(data)[i])+MA_OGTT_AGE+factor(MA_PARITY)+OS_OGTT_GA+factor(OS_CENTRE_ID)+PC1+PC2+PC3+PC4+PC5,data1) #for EUR
+  result1 <- data.frame(tidy(model))
+  m=confint(model)
+  rownames(result1)<-result1$term
+  result[n,'group']<-k
+  result[n,'PRS']<-colnames(data)[i]
+  result[n,'trait']<-j
+  result[n,'p']<-result1['get(colnames(data)[i])','p.value']
+  result[n,'z']<-result1['get(colnames(data)[i])','statistic']
+  result[n,'beta']<-result1['get(colnames(data)[i])','estimate']
+  result[n,'std']<-result1['get(colnames(data)[i])','std.error']
+  result[n,'ci_low']<-m['get(colnames(data)[i])',1]
+  result[n,'ci_up']<-m['get(colnames(data)[i])',2]
  n<-n+1
   }
   }
