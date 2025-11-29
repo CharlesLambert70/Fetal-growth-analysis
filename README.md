@@ -1,1 +1,1 @@
-The codes for association analysis, mediation analysis, two-sample Mendelian randomization, colocalization analyses in assessing the effects of maternal and fetal genetic predispositions to insulin deficiency and resistance on fetal growth.
+The codes for association analysis, mediation analysis, meta-analysis, two-sample Mendelian randomization, colocalization analyses in assessing the effects of maternal and fetal genetic predispositions to insulin deficiency and resistance on fetal growth.
